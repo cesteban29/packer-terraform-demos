@@ -26,12 +26,12 @@ source "amazon-ebs" "ubuntu" {
   region        = "us-east-1"
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*"
+      name                = "amzn2-ami-hvm-*-x86_64-gp2"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
     most_recent = true
-    owners      = ["099720109477"]
+    owners      = ["137112412989"] # This is the AWS account ID for Amazon Linux 2024
   }
   ssh_username = "ubuntu"
 }
