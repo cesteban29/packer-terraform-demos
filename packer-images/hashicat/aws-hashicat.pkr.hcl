@@ -45,7 +45,7 @@ build {
   EC2 image with apache web server on it and hashicat app. 
       EOT
       bucket_labels = {
-        "os"             = "Ubuntu",
+        "os"             = "Amazon Linux 2024",
         "app"            = "Hashicat-app",
       }
 
@@ -55,7 +55,7 @@ build {
     }
 
   sources = [
-    "source.amazon-ebs.ubuntu"
+    "source.amazon-ebs.amazon-linux"
   ]
 
   provisioner "file" {
