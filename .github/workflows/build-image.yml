@@ -3,7 +3,7 @@ name: Build Packer Image
 on:
   push:
     paths:
-      - 'packer-images/**'
+      - 'packer-images/hashicat/**'
 
 jobs:
   build-packer-image:
