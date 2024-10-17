@@ -20,10 +20,12 @@ jobs:
           version: latest
 
       - name: Configure HCP Packer Authentication # This is the step to configure HCP Packer authentication
-        uses: hashicorp/setup-hcp@v1
-        with:
-          client-id: ${{ secrets.HCP_CLIENT_ID }}
-          client-secret: ${{ secrets.HCP_CLIENT_SECRET }}
+        env:
+          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+        run: |
+          echo "HCP_CLIENT_ID=$HCP_CLIENT_ID" >> $GITHUB_ENV
+          echo "HCP_CLIENT_SECRET=$HCP_CLIENT_SECRET" >> $GITHUB_ENV
 
       - name: Configure AWS Credentials # This is the step to configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
