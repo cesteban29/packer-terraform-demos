@@ -19,20 +19,17 @@ jobs:
           version: latest
 
       - name: Configure HCP Packer Authentication
-        env:
-          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
-          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
-        run: |
-          echo "export HCP_CLIENT_ID=${HCP_CLIENT_ID}" >> $GITHUB_ENV
-          echo "export HCP_CLIENT_SECRET=${HCP_CLIENT_SECRET}" >> $GITHUB_ENV
+        uses: hashicorp/setup-hcp@v1
+        with:
+          client-id: ${{ secrets.HCP_CLIENT_ID }}
+          client-secret: ${{ secrets.HCP_CLIENT_SECRET }}
 
       - name: Configure AWS Credentials
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> $GITHUB_ENV
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  
 
       - name: Initialize Packer
         working-directory: packer-images/hashicat
