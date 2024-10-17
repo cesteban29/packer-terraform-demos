@@ -20,7 +20,7 @@ locals{
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
 
-source "amazon-ebs" "ubuntu" {
+source "amazon-ebs" "amazon-linux" {
   ami_name      = "${var.ami_prefix}-${local.timestamp}"
   instance_type = "t2.micro"
   region        = "us-east-1"
@@ -60,16 +60,18 @@ build {
 
   provisioner "file" {
   source = "files/deploy_app.sh"
-  destination = "/home/ubuntu/"
+  destination = "/home/ec2-user/deploy_app.sh"
   }
   
   provisioner "shell" {
     inline =[
-        "echo '*** Installing apache2'",
-        "sudo apt-get update -y",
-        "sudo apt-get install apache2 -y",
-        "echo '*** Completed Installing apache2'",
-        "sudo mv /home/ubuntu/deploy_app.sh /var/www/html/index.html"
+      "echo '*** Installing Apache (httpd)'",
+      "sudo yum update -y",
+      "sudo yum install httpd -y",
+      "echo '*** Completed Installing Apache (httpd)'",
+      "sudo mv /home/ec2-user/deploy_app.sh /var/www/html/index.html",
+      "sudo systemctl enable httpd",
+      "sudo systemctl start httpd"
     ]
   }
 }
