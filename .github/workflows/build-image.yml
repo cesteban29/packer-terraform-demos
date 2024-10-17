@@ -2,42 +2,43 @@ name: Build Packer Image
 
 on:
   push:
-    paths:
+    paths: # This is the path to the packer image
       - 'packer-images/hashicat/**'
+  workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
 
 jobs:
   build-packer-image:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Code # This is the step to checkout the code
         uses: actions/checkout@v3
 
-      - name: Install Packer
+      - name: Install Packer # This is the step to install packer
         uses: hashicorp/setup-packer@v2
         with:
           version: latest
 
-      - name: Configure HCP Packer Authentication
+      - name: Configure HCP Packer Authentication # This is the step to configure HCP Packer authentication
         uses: hashicorp/setup-hcp@v1
         with:
           client-id: ${{ secrets.HCP_CLIENT_ID }}
           client-secret: ${{ secrets.HCP_CLIENT_SECRET }}
 
-      - name: Configure AWS Credentials
+      - name: Configure AWS Credentials # This is the step to configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1  
 
-      - name: Initialize Packer
+      - name: Initialize Packer # This is the step to initialize packer
         working-directory: packer-images/hashicat
         run: |
           echo "Current working directory: $(pwd)"
           packer init aws-hashicat.pkr.hcl
 
-      - name: Build Packer Image
+      - name: Build Packer Image # This is the step to build the packer image
         working-directory: packer-images/hashicat
         run: |
           echo "Current working directory: $(pwd)"
