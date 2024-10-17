@@ -5,6 +5,10 @@ on:
     paths: # This is the path to the packer image
       - 'packer-images/hashicat/**'
   workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
+    inputs:
+      build_fingerprint:
+        description: 'Optional HCP Packer Build Fingerprint to resume an incomplete build'
+        required: false
 
 jobs:
   build-packer-image:
@@ -18,6 +22,11 @@ jobs:
         uses: hashicorp/setup-packer@v2
         with:
           version: latest
+
+      # This is the step to set the HCP Packer build fingerprint
+      - name: Set HCP Packer Build Fingerprint
+        if: ${{ github.event.inputs.build_fingerprint != '' }}
+        run: echo "HCP_PACKER_BUILD_FINGERPRINT=${{ github.event.inputs.build_fingerprint }}" >> $GITHUB_ENV
 
       - name: Configure HCP Packer Authentication # This is the step to configure HCP Packer authentication
         env:
