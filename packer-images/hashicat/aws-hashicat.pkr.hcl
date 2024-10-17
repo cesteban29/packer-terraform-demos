@@ -46,7 +46,7 @@ build {
       EOT
       bucket_labels = {
         "os"             = "Ubuntu",
-        "app"            = "Hashicat",
+        "app"            = "Hashicat-app",
       }
 
       build_labels = {
