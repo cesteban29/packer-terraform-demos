@@ -35,9 +35,13 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> $GITHUB_ENV
 
       - name: Initialize Packer
-        working-directory: .
-        run: packer init aws-hashicat.pkr.hcl
+        working-directory: packer-images/hashicat
+        run: |
+          echo "Current working directory: $(pwd)"
+          packer init aws-hashicat.pkr.hcl
 
       - name: Build Packer Image
-        working-directory: .
-        run: packer build aws-hashicat.pkr.hcl
+        working-directory: packer-images/hashicat
+        run: |
+          echo "Current working directory: $(pwd)"
+          packer build aws-hashicat.pkr.hcl
