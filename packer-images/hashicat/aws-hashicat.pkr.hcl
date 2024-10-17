@@ -42,7 +42,7 @@ build {
   hcp_packer_registry {
       bucket_name = "hashicat-demo"
       description = <<EOT
-  EC2 image with apache web server on it and hashicat app. 
+  EC2 image with apache web-server on it and hashicat app. 
       EOT
       bucket_labels = {
         "os"             = "Ubuntu",
