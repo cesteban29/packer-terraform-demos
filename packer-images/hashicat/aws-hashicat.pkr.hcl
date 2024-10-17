@@ -33,7 +33,7 @@ source "amazon-ebs" "ubuntu" {
     most_recent = true
     owners      = ["137112412989"] # This is the AWS account ID for Amazon Linux 2024
   }
-  ssh_username = "ubuntu"
+  ssh_username = "ec2-user"
 }
 
 build {
