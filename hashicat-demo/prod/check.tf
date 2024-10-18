@@ -11,10 +11,15 @@ check "health_check" {
 
 check "ami_version_check" {
   data "aws_instance" "hashicat_current" {
-    instance_tags = {
-      Name = "${var.prefix}-hashicat-instance"
+    filter {
+      name   = "Name"
+      values = ["${var.prefix}-hashicat-instance"]
     }
-    instance_state = "running"
+
+    filter {
+      name   = "instance-state-name"
+      values = ["running"]
+    }
   }
 
   assert {
