@@ -14,6 +14,7 @@ check "ami_version_check" {
     instance_tags = {
       Name = "${var.prefix}-hashicat-instance"
     }
+    instance_state = "running"
   }
 
   assert {
