@@ -14,5 +14,5 @@ variable "hcp_project_id" {
 
 variable "prefix" {
   description = "The prefix for the resources"
-  default = "dev"
+  default = "demo"
 }
