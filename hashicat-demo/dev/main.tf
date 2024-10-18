@@ -24,7 +24,7 @@ provider "aws" {
 # Get the latest version of the Packer build from HCP Packer
 data "hcp_packer_version" "hashicat" {
   bucket_name = "hashicat-demo"
-  channel_name = "latest"
+  channel_name = "dev"
 }
 
 #PACKER ARTIFACT
