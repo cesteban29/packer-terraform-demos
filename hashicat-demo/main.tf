@@ -38,7 +38,7 @@ data "hcp_packer_artifact" "hashicat_us_east_1" {
 module "hashicat" {
   source  = "app.terraform.io/cesteban-tfc/hashicat/aws"
   version = "1.9.1"
-  instance_type = "var.instance_type"
+  instance_type = var.instance_type
   region = var.region 
   instance_ami = data.hcp_packer_artifact.hashicat_us_east_1.external_identifier # AMI ID from HCP Packer registry
 }
