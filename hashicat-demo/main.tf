@@ -36,7 +36,7 @@ data "hcp_packer_artifact" "hashicat_us_east_1" {
 
 # HCP TERRAFORM MODULE
 module "hashicat" {
-  source  = "app.terraform.io/CE-Demos/hashicat/aws"
+  source  = "app.terraform.io/cesteban-tfc/hashicat/aws"
   version = "1.9.1"
   instance_type = "var.instance_type"
   region = var.region 
