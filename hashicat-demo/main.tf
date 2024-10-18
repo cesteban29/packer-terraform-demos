@@ -12,7 +12,9 @@ terraform {
   }
 }
 
-provider "hcp" {}
+provider "hcp" {
+  project_id = var.hcp_project_id
+}
 
 provider "aws" {
   region = var.region
@@ -37,8 +39,9 @@ data "hcp_packer_artifact" "hashicat_us_east_1" {
 # HCP TERRAFORM MODULE
 module "hashicat" {
   source  = "app.terraform.io/cesteban-tfc/hashicat/aws"
-  version = "1.9.1"
+  version = "1.9.2"
   instance_type = var.instance_type
   region = var.region 
+  prefix = var.prefix
   instance_ami = data.hcp_packer_artifact.hashicat_us_east_1.external_identifier # AMI ID from HCP Packer registry
 }

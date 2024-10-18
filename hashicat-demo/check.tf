@@ -12,7 +12,7 @@ check "health_check" {
 check "ami_version_check" {
   data "aws_instance" "hashicat_current" {
     instance_tags = {
-      Name = "demo-hashicat-instance"
+      Name = "${var.prefix}-hashicat-instance"
     }
   }
 
