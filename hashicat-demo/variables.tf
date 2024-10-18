@@ -9,7 +9,7 @@ variable "region" {
 
 variable "hcp_project_id" {
   description = "The HCP project ID"
-  default = "cesteban-project"
+  default = "65bd0d48-2dae-452b-9fb6-da5e021a9490"
 }
 
 variable "prefix" {
