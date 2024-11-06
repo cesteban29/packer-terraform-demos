@@ -59,7 +59,7 @@ build {
   ]
 
   provisioner "file" {
-  source = "files/index.html"
+  source = "files/basic.html"
   destination = "/home/ec2-user/index.html"
   }
   
