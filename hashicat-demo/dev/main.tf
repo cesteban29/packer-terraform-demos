@@ -19,7 +19,7 @@ data "hcp_packer_artifact" "hashicat-artifact" {
 module "hashicat" {
   # EC2 INSTANCE MODULE
   source  = "app.terraform.io/cesteban-tfc/ec2-instance/aws"
-  version = "1.1.0"
+  version = "1.2.0"
   instance_type = var.instance_type
   region = var.region 
   prefix = var.prefix
