@@ -5,7 +5,8 @@ Welcome to the **Packer Terraform Demos** repository! This repository contains a
 ## 📁 Repository Structure
 
 - [`hashicat-demo/`](#hashicat-demo) - A demo deploying the HashiCat application using Terraform.
-- [`docker-server-demo/`](#docker-server-demo) - (Coming Soon) A demo deploying a Docker server using Terraform.
+- [`terramino-demo/`](#terramino-demo) - A demo deploying the Terramino application using Terraform + Packer.
+- [`pre-reqs/`](#pre-reqs) - Pre-requisites for the demos.
 - [`packer-images/`](#packer-images) - Contains Packer build configurations for creating custom machine images.
 
 ---
