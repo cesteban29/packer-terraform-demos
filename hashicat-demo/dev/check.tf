@@ -13,7 +13,7 @@ check "ami_version_check" {
   data "aws_instance" "hashicat_current" {
     filter {
       name   = "tag:Name"
-      values = ["${var.prefix}-hashicat-instance"]
+      values = ["${var.prefix}-demo-instance"]
     }
 
     filter {
