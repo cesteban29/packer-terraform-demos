@@ -1,8 +1,8 @@
 
-output "catapp_url"{
-  value = module.terramino.catapp_url
+output "terramino_url" {
+  value = module.terramino.instance_url
 }
-  
-output "catapp_ip"{
-  value = module.terramino.catapp_ip
+
+output "terramino_ip" {
+  value = module.terramino.instance_ip
 }
