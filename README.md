@@ -76,13 +76,6 @@ Terramino is a tetris game with HashiCorp product colors.
 
 5. Follow any additional instructions provided in the `hashicat-demo` directory.
 
-### Docker Server Demo
-
-**Status:** *Coming Soon*
-
-The **Docker Server Demo** will showcase how to deploy a Docker server using Terraform.
-
-**Location:** [`docker-server-demo/`](docker-server-demo/)
 
 #### Contents
 
@@ -104,8 +97,7 @@ The `packer-images` directory contains Packer build configurations used to creat
 ### Structure
 
 - `packer-images/hashicat/`: Packer template for building image used in the HashiCat demo.
-- `packer-images/dockerserver/`: (Coming Soon) Packer templates for building images for the Docker server demo.
-- `packer-images/minecraftserver/`: (Coming Soon) Additional Packer templates for other demos.
+- `packer-images/terramino/`: Packer template for building image used in the Terramino demo.
 
 ### Building Images with Packer
 
