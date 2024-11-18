@@ -14,7 +14,8 @@ Welcome to the **Packer Terraform Demos** repository! This repository contains a
 
 These demos are designed to help you understand how Packer and Terraform can work together to automate the building of machine images and the provisioning of infrastructure.
 
-### Prerequisites
+
+## Prerequisites
 
 - [Packer](https://www.packer.io/downloads) installed on your local machine.
 - [Terraform](https://www.terraform.io/downloads) installed on your local machine.
@@ -29,7 +30,17 @@ These demos are designed to help you understand how Packer and Terraform can wor
 
 The **HashiCat Demo** demonstrates how to deploy the HashiCat application using Terraform.
 
+HashiCat is a simple web application that displays a cat picture.
+
 **Location:** [`hashicat-demo/`](hashicat-demo/)
+
+### Terramino Demo
+
+The **Terramino Demo** demonstrates how to deploy the Terramino application using Terraform + Packer.
+
+Terramino is a tetris game with HashiCorp product colors.
+
+**Location:** [`terramino-demo/`](terramino-demo/)
 
 #### Contents
 
@@ -175,33 +186,18 @@ This repository includes GitHub Actions workflows that automatically build the P
 
 ## 🌐 Prerequisites Setup
 
-### AWS CLI Configuration
+Configure Credentials:
 
-Ensure that your AWS CLI is configured with the necessary credentials:
+   For Packer Builds:
+   - AWS CLI
+   - HCP Packer
 
-```bash
-aws configure
-```
+   For Terraform:
+   - HCP Platform for HCP Packer
+   - AWS Credentials
 
-### Environment Variables
-
-Set any necessary environment variables for Packer and Terraform, such as AWS credentials if not using the AWS CLI configuration.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! If you have a demo you'd like to add or improvements to existing demos, please feel free to submit a pull request.
-
-
-## 📞 Support
-
-If you have any questions or need assistance, please open an issue in this repository.
-email: cesteban@hashicorp.com
-
----
-
-Thank you for exploring the Packer Terraform Demos! Happy building! 🚀
-
+HCP Terraform Setup:
+   - Have a HCP TF organization
+   - Have a HCP TF workspace
 
 
