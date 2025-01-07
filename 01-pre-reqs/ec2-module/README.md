@@ -1,6 +1,8 @@
 # HCP Terraform Module for EC2 Instance
 
-This is a Terraform module that creates an EC2 instance in AWS
+This is a Terraform module that creates an EC2 instance in AWS. This should not be it's own HCP TF workspace, but instead be called from other workspaces.
+
+Please put this module into your Private Module Registry in HCP Terraform.
 
 ## Providers
 
