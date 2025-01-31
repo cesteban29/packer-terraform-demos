@@ -78,6 +78,8 @@ build {
       "sudo yum install httpd -y",
       "echo '*** Completed Installing Apache (httpd)'",
       "sudo mv /home/ec2-user/index.html /var/www/html/index.html",
+      "sudo mv /home/ec2-user/favicon-32x32.png /var/www/html/favicon-32x32.png",
+      "sudo mv /home/ec2-user/terramino-background.png /var/www/html/terramino-background.png",
       "sudo systemctl enable httpd",
       "sudo systemctl start httpd"
     ]
