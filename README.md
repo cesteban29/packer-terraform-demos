@@ -4,10 +4,12 @@ Welcome to the **Packer Terraform Demos** repository! This repository contains a
 
 ## 📁 Repository Structure
 
+- [`.github/workflows/`](#github-workflows) - GitHub Actions workflows for building Packer images.
+- [`01-pre-reqs/`](#pre-reqs) - Pre-requisites for the demos.
+- [`02-packer-images/`](#packer-images) - Contains Packer build configurations for creating custom machine images.
 - [`hashicat-demo/`](#hashicat-demo) - A demo deploying the HashiCat application using Terraform.
 - [`terramino-demo/`](#terramino-demo) - A demo deploying the Terramino application using Terraform + Packer.
-- [`pre-reqs/`](#pre-reqs) - Pre-requisites for the demos.
-- [`packer-images/`](#packer-images) - Contains Packer build configurations for creating custom machine images.
+
 
 ---
 
