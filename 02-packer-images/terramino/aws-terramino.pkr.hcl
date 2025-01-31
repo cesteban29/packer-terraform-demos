@@ -59,7 +59,7 @@ build {
   ]
 
   provisioner "file" {
-  source = "files/basic.html"
+  source = "files/pausecore.html"
   destination = "/home/ec2-user/index.html"
   }
   provisioner "file" {
