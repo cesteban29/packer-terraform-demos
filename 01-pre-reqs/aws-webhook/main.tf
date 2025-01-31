@@ -11,7 +11,7 @@ locals {
   hcp_project_name = data.hcp_project.current.name
   base_name        = "hcp-packer-webhook-handler_${local.hcp_org_name}"
 }
-
+/*
 # This is the service principal that will be used to create the webhook handler. A service principal is a collection of permissions that are associated with a resource.
 resource "hcp_service_principal" "webhook" {
   name   = "hcp-packer-webhook-handler"
@@ -24,6 +24,7 @@ resource "hcp_project_iam_binding" "webhook" {
   principal_id = hcp_service_principal.webhook.resource_id
   role         = "roles/viewer"
 }
+*/
 
 # This is the random password that will be used to create the HMAC token. A random password is a collection of characters that are used to create a password.
 resource "random_password" "hmac_token" {
