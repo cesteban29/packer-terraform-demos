@@ -3,7 +3,7 @@ name: Build Hashicat Packer Image
 on:
   push:
     paths: # This is the path to the packer image
-      - 'packer-images/hashicat/**'
+      - '02-packer-images/hashicat/**'
   workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
     inputs:
       build_fingerprint:

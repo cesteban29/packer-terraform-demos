@@ -3,7 +3,7 @@ name: Build Terramino Packer Image
 on:
   push:
     paths: # This is the path to the packer image
-      - 'packer-images/terramino/**'
+      - '02-packer-images/terramino/**'
   workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
     inputs:
       build_fingerprint:
