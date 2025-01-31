@@ -11,7 +11,7 @@ packer {
 #This variable is used for the ami_name
 variable "ami_prefix" {
   type = string
-  default = "terramino-demo"
+  default = "terramino-demo-webhook"
 }
 
 #Locals are useful when you need to format commanly used values
