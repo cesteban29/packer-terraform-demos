@@ -1,4 +1,5 @@
 # MODULE VERSIONS
+# variables cannot be used in the module version argument :( sad isn't it?
 variable "ec2_module_version" {
   description = "The version of the ec2 module"
   default     = "1.5.0"

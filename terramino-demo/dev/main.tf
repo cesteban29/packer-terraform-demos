@@ -19,7 +19,7 @@ data "hcp_packer_artifact" "terramino-artifact" {
 module "terramino" {
   # EC2 INSTANCE MODULE
   source        = "app.terraform.io/cesteban-tfc/ec2-instance/aws"
-  version       = var.ec2_module_version
+  version       = "1.5.0"
   instance_type = var.instance_type
   region        = var.region
   prefix        = var.prefix
