@@ -44,13 +44,13 @@ jobs:
           aws-region: us-east-1  
 
       - name: Initialize Packer # This is the step to initialize packer
-        working-directory: packer-images/terramino
+        working-directory: 02-packer-images/terramino
         run: |
           echo "Current working directory: $(pwd)"
           packer init aws-terramino.pkr.hcl
 
       - name: Build Packer Image # This is the step to build the packer image
-        working-directory: packer-images/terramino
+        working-directory: 02-packer-images/terramino
         run: |
           echo "Current working directory: $(pwd)"
           packer build aws-terramino.pkr.hcl
