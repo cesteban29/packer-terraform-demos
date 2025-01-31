@@ -62,6 +62,14 @@ build {
   source = "files/basic.html"
   destination = "/home/ec2-user/index.html"
   }
+  provisioner "file" {
+  source = "files/favicon-32x32.png"
+  destination = "/home/ec2-user/favicon-32x32.png"
+  }
+  provisioner "file" {
+  source = "files/terramino-background.png"
+  destination = "/home/ec2-user/terramino-background.png"
+  }
   
   provisioner "shell" {
     inline =[
