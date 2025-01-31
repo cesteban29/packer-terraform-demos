@@ -1,4 +1,11 @@
+# MODULE VERSIONS
+variable "ec2_module_version" {
+  description = "The version of the ec2 module"
+  default     = "1.5.0"
+}
 
+
+# MODULE VARIABLES
 variable "instance_type" {
   description = "the size of the ec2 instance that you are provisioning!"
 }
