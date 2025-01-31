@@ -154,9 +154,6 @@ Note: These permissions can be further restricted by specific resource ARNs for 
 | [aws_secretsmanager_secret_version.hcp_credential](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
 | [aws_secretsmanager_secret_version.hmac_token](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
 | [hcp_notifications_webhook.aws](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/notifications_webhook) | resource |
-| [hcp_project_iam_binding.webhook](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/project_iam_binding) | resource |
-| [hcp_service_principal.webhook](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/service_principal) | resource |
-| [hcp_service_principal_key.webhook](https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/resources/service_principal_key) | resource |
 | [random_password.hmac_token](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [archive_file.webhook_lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [aws_iam_policy_document.lambda_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
