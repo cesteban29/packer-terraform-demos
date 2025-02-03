@@ -15,6 +15,14 @@ variable "ami_prefix" {
   type = string
   default = "prod-terramino-demo"
 }
+variable "aws_instance_type" {
+  type = string
+  default = "t2.micro"
+}
+variable "aws_region" {
+  type = string
+  default = "us-east-1"
+}
 
 #Locals are useful when you need to format commanly used values
 #
