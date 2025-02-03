@@ -1,9 +1,11 @@
-name: Build Terramino Packer Image
+name: Build Terramino (PROD) Packer Image
 
 on:
   push:
     paths: # This is the path to the packer image
-      - '02-packer-images/terramino/**'
+      - '02-packer-images/terramino/files/*.png'
+      - '02-packer-images/terramino/files/pausescore.html'
+      - '02-packer-images/terramino/prod-terramino.pkr.hcl'
   workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
     inputs:
       build_fingerprint:
@@ -41,16 +43,16 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}  # Set this in GitHub repository settings -> Secrets and variables -> Variables
 
       - name: Initialize Packer # This is the step to initialize packer
         working-directory: 02-packer-images/terramino
         run: |
           echo "Current working directory: $(pwd)"
-          packer init aws-terramino.pkr.hcl
+          packer init prod-terramino.pkr.hcl
 
       - name: Build Packer Image # This is the step to build the packer image
         working-directory: 02-packer-images/terramino
         run: |
           echo "Current working directory: $(pwd)"
-          packer build aws-terramino.pkr.hcl
+          packer build prod-terramino.pkr.hcl

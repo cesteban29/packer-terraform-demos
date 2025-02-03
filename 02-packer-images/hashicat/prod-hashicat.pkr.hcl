@@ -1,3 +1,5 @@
+# PROD-HASHICAT Packer Build File
+
 packer {
   required_plugins {
     amazon = {
@@ -11,7 +13,7 @@ packer {
 #This variable is used for the ami_name
 variable "ami_prefix" {
   type = string
-  default = "terramino-demo-webhook"
+  default = "prod-hashicat-demo"
 }
 
 #Locals are useful when you need to format commanly used values
@@ -22,8 +24,8 @@ locals{
 
 source "amazon-ebs" "amazon-linux" {
   ami_name      = "${var.ami_prefix}-${local.timestamp}"
-  instance_type = "t2.micro"
-  region        = "us-east-1"
+  instance_type = var.aws_instance_type // t2.micro
+  region        = var.aws_region // us-east-1
   source_ami_filter {
     filters = {
       name                = "amzn2-ami-hvm-*-x86_64-gp2"
@@ -37,16 +39,16 @@ source "amazon-ebs" "amazon-linux" {
 }
 
 build {
-  name = "terramino-demo-image"
+  name = "hashicat-demo-image"
 
   hcp_packer_registry {
-      bucket_name = "terramino-demo"
+      bucket_name = "hashicat-demo"
       description = <<EOT
-  EC2 image with apache web server on it and terramino app. 
+  EC2 image with apache web server on it and hashicat app. 
       EOT
       bucket_labels = {
         "os"             = "Amazon Linux 2024",
-        "app"            = "Terramino-app",
+        "app"            = "Hashicat-app",
       }
 
       build_labels = {
@@ -59,16 +61,8 @@ build {
   ]
 
   provisioner "file" {
-  source = "files/pausescore.html"
-  destination = "/home/ec2-user/index.html"
-  }
-  provisioner "file" {
-  source = "files/favicon-32x32.png"
-  destination = "/home/ec2-user/favicon-32x32.png"
-  }
-  provisioner "file" {
-  source = "files/terramino-background.png"
-  destination = "/home/ec2-user/terramino-background.png"
+  source = "files/prod_hashicat.sh"
+  destination = "/home/ec2-user/deploy_app.sh"
   }
   
   provisioner "shell" {
@@ -77,9 +71,7 @@ build {
       "sudo yum update -y",
       "sudo yum install httpd -y",
       "echo '*** Completed Installing Apache (httpd)'",
-      "sudo mv /home/ec2-user/index.html /var/www/html/index.html",
-      "sudo mv /home/ec2-user/favicon-32x32.png /var/www/html/favicon-32x32.png",
-      "sudo mv /home/ec2-user/terramino-background.png /var/www/html/terramino-background.png",
+      "sudo mv /home/ec2-user/deploy_app.sh /var/www/html/index.html",
       "sudo systemctl enable httpd",
       "sudo systemctl start httpd"
     ]

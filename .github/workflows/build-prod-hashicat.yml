@@ -1,0 +1,57 @@
+name: Build Hashicat Packer Image
+
+on:
+  push:
+    paths: # This is the path to the packer image
+      - '02-packer-images/hashicat/files/prod_hashicat.sh'
+      - '02-packer-images/hashicat/prod-hashicat.pkr.hcl'
+  workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
+    inputs:
+      build_fingerprint:
+        description: 'Optional HCP Packer Build Fingerprint to resume an incomplete build'
+        required: false
+
+jobs:
+  build-packer-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code # This is the step to checkout the code
+        uses: actions/checkout@v3
+
+      - name: Install Packer # This is the step to install packer
+        uses: hashicorp/setup-packer@v2
+        with:
+          version: latest
+
+      # This is the step to set the HCP Packer build fingerprint
+      - name: Set HCP Packer Build Fingerprint
+        if: ${{ github.event.inputs.build_fingerprint != '' }}
+        run: echo "HCP_PACKER_BUILD_FINGERPRINT=${{ github.event.inputs.build_fingerprint }}" >> $GITHUB_ENV
+
+      - name: Configure HCP Packer Authentication # This is the step to configure HCP Packer authentication
+        env:
+          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+        run: |
+          echo "HCP_CLIENT_ID=$HCP_CLIENT_ID" >> $GITHUB_ENV
+          echo "HCP_CLIENT_SECRET=$HCP_CLIENT_SECRET" >> $GITHUB_ENV
+
+      - name: Configure AWS Credentials # This is the step to configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}  # Set this in GitHub repository settings -> Secrets and variables -> Variables
+
+      - name: Initialize Packer # This is the step to initialize packer
+        working-directory: 02-packer-images/hashicat
+        run: |
+          echo "Current working directory: $(pwd)"
+          packer init prod-hashicat.pkr.hcl
+
+      - name: Build Packer Image # This is the step to build the packer image
+        working-directory: 02-packer-images/hashicat
+        run: |
+          echo "Current working directory: $(pwd)"
+          packer build prod-hashicat.pkr.hcl

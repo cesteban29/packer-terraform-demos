@@ -1,3 +1,5 @@
+# AWS-TERRAMINO-PROD Packer Build File
+
 packer {
   required_plugins {
     amazon = {
@@ -11,7 +13,7 @@ packer {
 #This variable is used for the ami_name
 variable "ami_prefix" {
   type = string
-  default = "hashicat-demo"
+  default = "terramino-demo-webhook"
 }
 
 #Locals are useful when you need to format commanly used values
@@ -37,16 +39,16 @@ source "amazon-ebs" "amazon-linux" {
 }
 
 build {
-  name = "hashicat-demo-image"
+  name = "terramino-demo-image"
 
   hcp_packer_registry {
-      bucket_name = "hashicat-demo"
+      bucket_name = "terramino-demo"
       description = <<EOT
-  EC2 image with apache web server on it and hashicat app. 
+  EC2 image with apache web server on it and terramino app. 
       EOT
       bucket_labels = {
         "os"             = "Amazon Linux 2024",
-        "app"            = "Hashicat-app",
+        "app"            = "Terramino-app",
       }
 
       build_labels = {
@@ -59,8 +61,16 @@ build {
   ]
 
   provisioner "file" {
-  source = "files/deploy_app.sh"
-  destination = "/home/ec2-user/deploy_app.sh"
+  source = "files/pausescore.html"
+  destination = "/home/ec2-user/index.html"
+  }
+  provisioner "file" {
+  source = "files/favicon-32x32.png"
+  destination = "/home/ec2-user/favicon-32x32.png"
+  }
+  provisioner "file" {
+  source = "files/terramino-background.png"
+  destination = "/home/ec2-user/terramino-background.png"
   }
   
   provisioner "shell" {
@@ -69,7 +79,9 @@ build {
       "sudo yum update -y",
       "sudo yum install httpd -y",
       "echo '*** Completed Installing Apache (httpd)'",
-      "sudo mv /home/ec2-user/deploy_app.sh /var/www/html/index.html",
+      "sudo mv /home/ec2-user/index.html /var/www/html/index.html",
+      "sudo mv /home/ec2-user/favicon-32x32.png /var/www/html/favicon-32x32.png",
+      "sudo mv /home/ec2-user/terramino-background.png /var/www/html/terramino-background.png",
       "sudo systemctl enable httpd",
       "sudo systemctl start httpd"
     ]
