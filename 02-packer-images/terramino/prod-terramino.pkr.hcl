@@ -13,7 +13,7 @@ packer {
 #This variable is used for the ami_name
 variable "ami_prefix" {
   type = string
-  default = "terramino-demo-webhook"
+  default = "prod-terramino-demo"
 }
 
 #Locals are useful when you need to format commanly used values
@@ -24,8 +24,8 @@ locals{
 
 source "amazon-ebs" "amazon-linux" {
   ami_name      = "${var.ami_prefix}-${local.timestamp}"
-  instance_type = "t2.micro"
-  region        = "us-east-1"
+  instance_type = var.aws_instance_type
+  region        = var.aws_region
   source_ami_filter {
     filters = {
       name                = "amzn2-ami-hvm-*-x86_64-gp2"
