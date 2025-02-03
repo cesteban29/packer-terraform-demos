@@ -54,4 +54,4 @@ jobs:
         working-directory: 02-packer-images/hashicat
         run: |
           echo "Current working directory: $(pwd)"
-          packer build dev-hashicat.pkr.hcl
+          packer build -var-file=variables.auto.pkrvars.hcl dev-hashicat.pkr.hcl

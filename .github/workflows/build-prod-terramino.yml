@@ -55,4 +55,4 @@ jobs:
         working-directory: 02-packer-images/terramino
         run: |
           echo "Current working directory: $(pwd)"
-          packer build prod-terramino.pkr.hcl
+          packer build -var-file=variables.auto.pkrvars.hcl prod-terramino.pkr.hcl
