@@ -1,4 +1,4 @@
-name: Build Hashicat Packer Image
+name: Build Hashicat (DEV) Packer Image
 
 on:
   push:
