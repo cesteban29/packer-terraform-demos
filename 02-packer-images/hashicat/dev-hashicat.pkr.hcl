@@ -61,7 +61,7 @@ build {
   ]
 
   provisioner "file" {
-  source = "files/deploy_app.sh"
+  source = "files/dev_hashicat.sh"
   destination = "/home/ec2-user/deploy_app.sh"
   }
   
