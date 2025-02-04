@@ -3,7 +3,7 @@ name: Build Hashicat (DEV) Packer Image
 on:
   push:
     paths: # This is the path to the packer image
-      - '02-packer-images/hashicat/files/dev_hashicat.sh'
+      - '02-packer-images/hashicat/files/dev_hashicat.html'
       - '02-packer-images/hashicat/dev-hashicat.pkr.hcl'
   workflow_dispatch: #Allows you to manually trigger the workflow from the GitHub Actions tab
     inputs:
