@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meow!</title>
+    <script>
+      // Fetch and display random dog image when page loads
+      window.onload = function() {
+        fetch('https://dog.ceo/api/breeds/image/random')
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('dogImage').src = data.message;
+          });
+      }
+    </script>
+    <style>
+      .center {
+        text-align: center;
+      }
+      .container {
+        width: 800px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- BEGIN -->
+      <div class="center">
+        <img id="dogImage" src="" alt="Random Dog">
+      </div>
+      <div class="center">
+        <h1>Meow World!</h1>
+        <h2>Welcome to Carlos' Cat app</h2>
+        <h3>This is Dev version of HashiCat!</h3>
+      </div>
+      <!-- END -->
+    </div>
+  </body>
+</html>
+
+

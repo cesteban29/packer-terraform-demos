@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Meow!</title>
+    <script>
+      // Fetch and display random cat image when page loads
+      window.onload = function() {
+        fetch('https://api.thecatapi.com/v1/images/search')
+          .then(response => response.json())
+          .then(data => {
+            // data is an array; set the src to the url of the first cat image in the array
+            document.getElementById('catImage').src = data[0].url;
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div style="width:600px;margin: 0 auto">
+      <!-- BEGIN -->
+      <center>
+        <img id="catImage" src="" alt="Random Cat" style="max-width: 100%; height: auto;">
+      </center>
+      <center><h1>Meow World!</h1></center>
+      <center><h2>Welcome to Carlos' Cat app</h2></center>
+      <center><h3>This is {Dev} version of HashiCat!</h3></center>
+      <!-- END -->
+    </div>
+  </body>
+</html>
+

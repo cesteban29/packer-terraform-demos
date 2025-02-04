@@ -71,8 +71,8 @@ build {
   ]
 
   provisioner "file" {
-  source = "files/dev_hashicat.sh"
-  destination = "/home/ec2-user/deploy_app.sh"
+  source = "files/dev_hashicat.html"
+  destination = "/home/ec2-user/dev_hashicat.html"
   }
   
   provisioner "shell" {
@@ -81,7 +81,7 @@ build {
       "sudo yum update -y",
       "sudo yum install httpd -y",
       "echo '*** Completed Installing Apache (httpd)'",
-      "sudo mv /home/ec2-user/deploy_app.sh /var/www/html/index.html",
+      "sudo mv /home/ec2-user/dev_hashicat.html /var/www/html/index.html",
       "sudo systemctl enable httpd",
       "sudo systemctl start httpd"
     ]
