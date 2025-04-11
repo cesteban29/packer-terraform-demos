@@ -1,18 +1,12 @@
 #main.tf
 
 # DYNAMIC PACKER IMAGE RETRIEVAL - GOLDEN IMAGE PIPELINE
-# Get the latest version of the Packer build from HCP Packer
-data "hcp_packer_version" "terramino-version" {
-  bucket_name  = "terramino-demo"
-  channel_name = "dev"
-}
-
-# Get the AMI ID from the HCP Packer registry
+# Get the AMI ID from the HCP Packer registry - single artifact sourcing https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/packer_artifact#single-artifact-sourcing
 data "hcp_packer_artifact" "terramino-artifact" {
-  bucket_name         = "terramino-demo"
-  version_fingerprint = data.hcp_packer_version.terramino-version.fingerprint
-  platform            = "aws"
-  region              = var.region
+  bucket_name    = "terramino-demo"
+  channel_name = "dev"
+  platform = "aws"
+  region         = var.region
 }
 
 # Deploys dynamically retrieved AMI from HCP Packer registry to AWS EC2

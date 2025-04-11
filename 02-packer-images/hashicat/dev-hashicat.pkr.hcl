@@ -63,6 +63,7 @@ build {
 
       build_labels = {
          "build-time"   = timestamp()
+         "environment"  = "dev"
       }
     }
 

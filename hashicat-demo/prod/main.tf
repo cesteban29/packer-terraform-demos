@@ -1,16 +1,10 @@
 #main.tf
 
 # DYNAMIC PACKER IMAGE RETRIEVAL - GOLDEN IMAGE PIPELINE
-# Get the latest version of the Packer build from HCP Packer
-data "hcp_packer_version" "hashicat-version" {
-  bucket_name = "hashicat-demo"
-  channel_name = "prod"
-}
-
-# Get the AMI ID from the HCP Packer registry
+# Get the AMI ID from the HCP Packer registry - single artifact sourcing https://registry.terraform.io/providers/hashicorp/hcp/latest/docs/data-sources/packer_artifact#single-artifact-sourcing
 data "hcp_packer_artifact" "hashicat-artifact" {
   bucket_name    = "hashicat-demo"
-  version_fingerprint = data.hcp_packer_version.hashicat-version.fingerprint
+  channel_name = "prod"
   platform = "aws"
   region         = var.region
 }
