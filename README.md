@@ -73,113 +73,98 @@ Each demo is organized into its own subdirectory for clarity and ease of use.
 ---
 # 🔄 Workflow
 
-## 1. Store Private Terraform Module into HCP Terraform Organization to be used in Demo
+## 1. Store Private Terraform Module
+Store module in HCP Terraform Organization for demo use
+### [ec2-module](#hcp-terraform-modules-created)
+- Create separate repository with proper module naming (ex: terraform-aws-nameofmodule)
+- Deploys VM and scaffolding
 
-### [ec2-module](#hcp-terraform-modules-created): deploys VM and scaffolding
-- This requires creating a seperate repository with proper module naming (ex: terraform-aws-nameofmodule)
+## 2. Deploy Pre-Requisite Terraform Workspaces
+### [`01-pre-reqs/aws-networking`](./01-pre-reqs/aws-networking/README.md)
+AWS Landing Zone creating a VPC
+### [`01-pre-reqs/aws-webhook`](./01-pre-reqs/aws-webhook/README.md)
+AWS Webhook for HCP Packer
 
-## 2. Deploy Pre-Requisite Terraform workspaces
-
-### [`01-pre-reqs/aws-networking`](./01-pre-reqs/aws-networking/README.md) - AWS Landing Zone creating a VPC
-### [`01-pre-reqs/aws-webhook`](./01-pre-reqs/aws-webhook/README.md) - AWS Webhook for HCP Packer
-
-## 3. Deploy Demo Terraform Workspaces (Hashicat & Terramino)
-
+## 3. Deploy Demo Terraform Workspaces
 ### HashiCat
-#### [`hashicat-demo/dev`](./hashicat-demo/README.md) - Terraform deployment for HashiCat (Dev)
-#### [`hashicat-demo/prod`](./hashicat-demo-README.md) - Terraform deployment for HashiCat (Prod)
-### Terramino
-#### [`terramino-demo/dev`](./terramino-demo/README.md) - Terraform deployment for Terramino (Dev)
-#### [`terramino-demo/prod`](./terramino-demo/README.md) - Terraform deployment for Terramino (Dev)
+- [`hashicat-demo/dev`](./hashicat-demo/README.md) - Dev deployment
+- [`hashicat-demo/prod`](./hashicat-demo-README.md) - Prod deployment
+### Terramino  
+- [`terramino-demo/dev`](./terramino-demo/README.md) - Dev deployment
+- [`terramino-demo/prod`](./terramino-demo/README.md) - Prod deployment
 
-## 4. Build Packer Images in Github Actions after adding Credentials
+## 4. Build Packer Images
+Add credentials and use Github Actions workflows in [`github/workflows`](./github/workflows/README.md)
+- [`02-packer-images/hashicat`](./02-packer-images/hashicat/README.md) - HashiCat images
+- [`02-packer-images/terramino`](./02-packer-images/terramino/README.md) - Terramino images
 
-#### [`02-packer-images/hashicat`](./02-packer-images/hashicat/README.md) - HashiCat Packer Images (Dev and Prod).
-#### [`02-packer-images/terramino`](./02-packer-images/terramino/README.md) - Terramino Packer Images (Dev and Prod).
-
-Use the Github Actions workflows diefined in the [`github/workflows`](./github/workflows/README.md) directory
-
-## 5. Deliver Packer-Terraform Demo Script
+## 5. Demo Script
 
 ### Introduction & Problem Statement
-"Let me start by asking - how do you currently manage your machine images across your organization? [Pause for response] Many organizations face challenges with:
-- Tracking which images are in use where 
-- Managing image updates across environments
-- Ensuring compliance and security standards
-- Preventing drift between dev and prod environments"
+"How do you currently manage machine images across your organization? [Pause] Common challenges:
+- Tracking image usage
+- Managing updates across environments 
+- Ensuring compliance and security
+- Preventing environment drift"
 
 ### Solution Overview
-"Today I'll show you how HCP Packer and Terraform work together to solve these challenges through:
+"HCP Packer and Terraform solve these through:
 - Centralized image management
-- Automated image lifecycle handling  
-- Continuous compliance validation
+- Automated lifecycle handling
+- Continuous compliance validation 
 - Streamlined dev-to-prod workflows"
 
 ### Demo Flow
 
-#### A. Image Building & Management (HCP Packer)
-"Let's start by building an image using HCP Packer. But first, why Packer?
-- **Reproducibility**: Every image build is version-controlled and documented
-- **Standardization**: Ensure all teams use approved, consistent base images
-- **Automation**: Eliminate manual image creation and reduce human error"
+#### A. Image Building & Management
+"Why Packer?
+- **Reproducibility**: Version-controlled, documented builds
+- **Standardization**: Approved, consistent base images
+- **Automation**: Eliminate manual creation and errors
 
-[Demo the image build process]
+HCP Packer provides:
+- Automatic versioning
+- Metadata tracking
+- Audit trail
+- AWS integration"
 
-"Notice how HCP Packer automatically:
-- Versions each build
-- Tracks metadata
-- Provides an audit trail
-- Integrates with your existing AWS infrastructure"
+#### B. Image Lifecycle Management 
+"Handling security vulnerabilities:
+- Automatic AMI deprecation
+- Tag updates with revocation reasons
+- Proper resource management
+- Zero manual cleanup"
 
-#### B. Image Lifecycle Management (Webhook Demo)
-"Here's where it gets interesting. What happens when you need to revoke an image due to a security vulnerability?
-
-[Demo the webhook functionality]
-
-When we revoke an image in HCP Packer:
-- AWS AMIs are automatically deprecated
-- Tags are updated with revocation reasons
-- Associated resources are properly managed
-- No manual cleanup required, saving operational overhead"
-
-#### C. Infrastructure Deployment (HCP Terraform)
-"Now, let's see how this integrates with your infrastructure deployment:
-
-[Deploy hashicat-dev workspace]
-
-Key points to highlight:
-1. **Dynamic Image Selection**: No more hardcoded AMI IDs
-2. **Run Task Validation**: Automatic checks for revoked or outdated images
-3. **Channel-based Deployment**: Easy promotion from dev to prod"
+#### C. Infrastructure Deployment
+"Integration demo highlights:
+1. **Dynamic Image Selection**
+2. **Run Task Validation** 
+3. **Channel-based Deployment**"
 
 #### D. Day 2 Operations
-"This is crucial for ongoing operations. How do you currently identify systems running outdated or vulnerable images?
-
-[Show Continuous Validation]
-
+"Ongoing management features:
 - Daily automated checks
-- Proactive notification of risks
+- Proactive notifications
 - Clear upgrade paths
-- Compliance reporting capabilities"
+- Compliance reporting"
 
 ### Business Impact
-"Let's discuss how this translates to business value:
-- **Risk Reduction**: Automated compliance and security checks
-- **Cost Savings**: Efficient image lifecycle management
-- **Time to Market**: Streamlined dev-to-prod pipeline
-- **Operational Efficiency**: Reduced manual intervention"
+"Value delivered:
+- **Risk Reduction**: Automated compliance/security
+- **Cost Savings**: Efficient lifecycle management
+- **Time to Market**: Streamlined pipeline
+- **Operational Efficiency**: Reduced manual work"
 
 ### Interactive Demonstration
-[Show either HashiCat or Terramino enhancement scenario]
-
-"Let's make this relevant to your environment. How would this workflow integrate with your current processes? [Pause for discussion]"
+[HashiCat/Terramino enhancement demo]
+"How would this fit your processes?"
 
 ### Q&A and Next Steps
-"What specific challenges in your image management process would you like to explore further?"
+"What image management challenges should we explore?"
 
 ### Demo Tips
-- Ask open-ended questions throughout
-- Listen for pain points to tailor the demo
-- Connect features to specific business outcomes
-- Provide concrete examples relevant to their industry
-- Keep technical depth flexible based on audience
+- Ask open questions
+- Listen for pain points
+- Connect to business outcomes
+- Use relevant examples
+- Adjust technical depth for audience
